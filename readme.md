@@ -76,7 +76,6 @@ Running the Tests
   - Tailwind CSS
   - ShadCN UI - UI Library
   - Axios - Asynchronous fetching
-  -
 - Backend
   - Express - Backend Framework
   - Express - Validator

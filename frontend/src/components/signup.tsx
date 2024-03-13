@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "@/utils/axios";
 
+// Import UI components for form and validation feedback
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,15 +17,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function Login() {
+  // State for form input values
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
 
+  // State for form validation errors
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [nameError, setNameError] = useState("");
+
+  // State for server error
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -53,6 +59,7 @@ export default function Login() {
   };
 
   const validatePassword = () => {
+    // Password validation checks
     const hasMinLength = password.length >= 8;
     const hasUpperCase = password
       .split("")
@@ -71,6 +78,7 @@ export default function Login() {
       .split("")
       .some((char) => `~!@#$%&^*-=_`.includes(char));
 
+    // Set password error messages
     if (!hasMinLength) {
       setPasswordError("Password must be at least 8 characters long.");
       return false;
@@ -98,14 +106,18 @@ export default function Login() {
     return true;
   };
 
+  // Function to handle form submission
   const handleSubmit = async (e) => {
+    // Prevent the default form submission
     e.preventDefault();
+
+    // validate the form inputs
     if (!validate()) return;
     setPasswordError("");
-
+    // Validate the password
     const isPasswordValid = validatePassword();
     if (!isPasswordValid) return;
-
+    // Send a POST request to the server
     try {
       const response = await axiosInstance.post("/api/signup", {
         username,

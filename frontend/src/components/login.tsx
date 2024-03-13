@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "@/utils/axios";
 
+// UI components from a design system or component library
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,21 +16,24 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function Login() {
+  // States for input values and validation errors
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook for navigation
 
+  // Function to validate input fields
   const validate = () => {
     let isValid = true;
 
-    // Reset error states
+    // Reset validation messages
     setUsernameError("");
     setPasswordError("");
 
+    // Check for empty fields and set error messages
     if (!username) {
       setUsernameError("Username is required.");
       isValid = false;
@@ -41,34 +45,33 @@ export default function Login() {
     return isValid;
   };
 
+  // Handles form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validate()) return;
+    if (!validate()) return; // Stop submission if validation fails
     try {
       const response = await axiosInstance.post("api/login", {
         username,
         password,
       });
       if (response.status === 400) {
-        throw new Error("Custom error message for status 400.");
+        throw new Error("Custom error message for status 400."); // Custom error for specific status
       }
-
-      // Handle successful signup
-      sessionStorage.setItem("username", username);
-      navigate("/dashboard");
+      sessionStorage.setItem("username", username); // Persist user session
+      navigate("/dashboard"); // Navigate to dashboard on success
     } catch (error) {
-      if (error.response) {
-        // Handle errors sent by the server
-        setError(
-          error.response.data.errors[0] ||
-            "An error occurred with your request."
-        );
-      } else {
-        setError("An unknown error occurred."); // Fallback error message
-      }
+      // Handle errors from API or thrown custom errors
+      setError(
+        error.response
+          ? error.response.data.errors[0] ||
+              "An error occurred with your request."
+          : "An unknown error occurred."
+      );
     }
   };
+
+  // Login form layout
   return (
     <div>
       <Card>
@@ -81,12 +84,7 @@ export default function Login() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label
-                className="float-left mb-2"
-                htmlFor="username"
-              >
-                Username
-              </Label>
+              <Label htmlFor="username">Username</Label>
               <Input
                 id="username"
                 placeholder="Username"
@@ -96,12 +94,7 @@ export default function Login() {
               {usernameError && <p className="text-red-500">{usernameError}</p>}
             </div>
             <div className="space-y-4 pt-4">
-              <Label
-                className="float-left mb-2"
-                htmlFor="password"
-              >
-                Password
-              </Label>
+              <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 placeholder="Password"
@@ -110,7 +103,8 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               {passwordError && <p className="text-red-500">{passwordError}</p>}
-              {error && <p className="text-red-500">{error}</p>}
+              {error && <p className="text-red-500">{error}</p>}{" "}
+              {/* General error message */}
             </div>
           </CardContent>
           <CardFooter className="flex row-auto">

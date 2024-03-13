@@ -1,6 +1,8 @@
 import { Navigate } from "react-router-dom";
 
+// Component to protect routes from unauthenticated users
 const ProtectedRoute = ({ children }) => {
+  // Check if the user is logged in
   const isLoggedIn = sessionStorage.getItem("username") !== null;
 
   if (!isLoggedIn) {
