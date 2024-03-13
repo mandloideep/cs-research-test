@@ -6,6 +6,8 @@
 
 This is a test project given by Professor Dr Xiwei Wang, designed to demonstrate my skills in full-stack web development using React for the frontend and Express for the backend.
 
+> **Note:** The project is currently hosted on a private GitHub repository. Pending approval from Professor Dr. Xiwei Wang, the repository can be made public to allow broader access and visibility.
+
 # Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
