@@ -1,4 +1,4 @@
-#React Test for Research Project
+# React Test for Research Project
 
 ### Professor: Dr Xiwei Wang
 
