@@ -1,7 +1,7 @@
 import { ModeToggle } from "./mode-toggle"; // Component to toggle light/dark mode
 import { Link, Outlet } from "react-router-dom"; // React Router components for navigation and nested routes
 
-import { GraduationCap } from "lucide-react"; // Icon component
+import { GithubIcon, GraduationCap } from "lucide-react"; // Icon component
 
 export default function LayoutPage() {
   return (
@@ -25,8 +25,16 @@ export default function LayoutPage() {
       </main>
       <footer className="flex justify-center items-center h-16 bg-gray-100 dark:bg-gray-800">
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          © 2024 | NEIU Research Project Test | Submission by Deep Mandloi
-        </p>{" "}
+          © 2024 | NEIU Research Project Test | Submission by Deep Mandloi{" "}
+          <br />
+          <Link
+            className="flex space-x-2 justify-center items-center"
+            to="https://github.com/mandloideep/cs-research-test"
+            target="_blank"
+          >
+            GitHub Repository
+          </Link>
+        </p>
       </footer>
     </div>
   );
