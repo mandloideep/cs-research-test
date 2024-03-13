@@ -6,7 +6,7 @@ const { check, validationResult } = require("express-validator");
 
 // Create Express server
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 // Enable CORS
 app.use(
